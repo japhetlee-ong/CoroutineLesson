@@ -5,6 +5,7 @@ import ph.edu.auf.coroutinelesson.models.UserModel
 import kotlin.random.Random
 
 class UserRepository {
+
     private val usernameList : ArrayList<String> = arrayListOf("alice_123", "bobSmith", "charlieBrown", "david_w", "eva_d")
     private val emailList : ArrayList<String> = arrayListOf("alice@example.com", "bob@example.com", "charlie@example.com", "david@example.com", "eva@example.com")
     private val nameList: ArrayList<String> = arrayListOf("Alice Johnson", "Bob Smith", "Charlie Brown", "David Williams", "Eva Davis")

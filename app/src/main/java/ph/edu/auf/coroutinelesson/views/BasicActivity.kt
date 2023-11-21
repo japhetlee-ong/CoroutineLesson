@@ -20,12 +20,30 @@ class BasicActivity : AppCompatActivity() {
 
         binding.btnRun.setOnClickListener{
             //TODO: COROUTINE HERE
+            lifecycleScope.launch {
+                val result = runLongTask()
+                withContext(Dispatchers.Main.immediate){
+                    binding.txtResult.text = result
+                }
+            }
+//            binding.txtResult.text = runLongTaskNotAsync()
         }
 
         binding.btnClickMe.setOnClickListener{
             //TODO: COROUTINE HERE
-
+            counter += 1
+            binding.txtClickMe.text = counter.toString()
         }
+    }
+
+    private suspend fun runLongTask(): String{
+        delay(2000)
+        return "Hello there"
+    }
+
+    private fun runLongTaskNotAsync(): String{
+        Thread.sleep(2000)
+        return "Hello there"
     }
 
 }

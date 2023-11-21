@@ -21,18 +21,28 @@ class AwaitActivity : AppCompatActivity() {
 
         binding.btnRun.setOnClickListener{
            //TODO: COROUTINE HERE
+            binding.txtResult.text = "Starting coroutine"
+            lifecycleScope.launch {
+                val resultOne = async { awaitLongFunctionOne() }
+                val resultTwo = async { awaitLongFunctionTwo() }
+                val resOne = resultOne.await()
+                val resTwo = resultTwo.await()
+                withContext(Dispatchers.Main.immediate){
+                    binding.txtResult.text = (resOne + resTwo).toString()
+                }
+            }
         }
 
     }
 
     private suspend fun awaitLongFunctionOne(): Int {
-        delay(2000)
+        delay(5000)
         Log.d(AwaitActivity::class.simpleName,"Task 1 done")
         return 20
     }
 
     private suspend fun awaitLongFunctionTwo(): Int {
-        delay(5000)
+        delay(2000)
         Log.d(AwaitActivity::class.simpleName,"Task 2 done")
         return 20
     }
